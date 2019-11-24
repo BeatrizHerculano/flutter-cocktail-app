@@ -31,20 +31,40 @@ class DrinksState extends State<DrinksView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Drinks'),
+        title: Text(
+          'Drinks',
+          style: TextStyle(fontSize: 25, fontFamily: "Calibre-Semibold"),
+        ),
       ),
-      body: FutureBuilder<List<DrinkByCategory>>(
-          future: _getJsonData(),
-          builder: (context, snapshot) {
-            if (snapshot.data == null) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            return DrinksListView(
-              drinksByCategory: snapshot.data,
-            );
-          }),
+      body: Column(
+        children: <Widget>[
+          Container(
+            child: Row(children: [
+              Text(
+                widget.category.strCategory,
+                style: TextStyle(fontFamily: "Calibre-Semibold", fontSize: 33),
+              )
+            ]),
+            padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+          ),
+          Container(
+            child: FutureBuilder<List<DrinkByCategory>>(
+                future: _getJsonData(),
+                builder: (context, snapshot) {
+                  if (snapshot.data == null) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return Expanded(
+                      child: DrinksListView(
+                    drinksByCategory: snapshot.data,
+                  ));
+                }),
+          )
+        ],
+      ),
+      //
       drawer: AppDrawer(),
     );
   }

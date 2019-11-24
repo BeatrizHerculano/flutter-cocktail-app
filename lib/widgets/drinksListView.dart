@@ -18,7 +18,6 @@ class DrinksListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: EdgeInsets.only(top: 10),
       children: _getListItems(),
     );
   }
@@ -31,16 +30,55 @@ class DrinksListViewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        child: Container(
-            child: ListTile(
-      title: Text(drinkByCategory.strDrink),
-      leading: Image.network(drinkByCategory.strDrinkThumb),
-      onTap: () {
+    return InkWell(
+      onTap: () => {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
-                DrinkDetailView(idDrink: drinkByCategory.idDrink)));
+                DrinkDetailView(idDrink: drinkByCategory.idDrink)))
       },
-    )));
+      child: Card(
+        child: Stack(
+          fit: StackFit.passthrough,
+          children: <Widget>[
+            Image.network(
+              drinkByCategory.strDrinkThumb,
+              alignment: FractionalOffset.topCenter,
+              fit: BoxFit.fitWidth,
+            ),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              width: MediaQuery.of(context).size.width,
+              child: Container(
+                  color: Colors.black54,
+                  child: Padding(
+                    padding: EdgeInsets.all(30),
+                    child: Text(
+                      drinkByCategory.strDrink,
+                      style: TextStyle(
+                          fontFamily: 'Calibre-Semibold',
+                          fontSize: 30,
+                          color: Colors.white),
+                    ),
+                  )),
+            )
+          ],
+        ),
+        // child:
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        semanticContainer: true,
+        margin: EdgeInsets.all(10),
+        elevation: 5,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+      ),
+    );
+
+    // return ListTile(
+    //     title: Text(),
+    //     leading: Image.network(drinkByCategory.strDrinkThumb),
+    //     onTap: () {
+    //
   }
 }

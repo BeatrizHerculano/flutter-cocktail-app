@@ -13,7 +13,6 @@ class DrinkDetailView extends StatelessWidget {
     var response = await http.get(url);
     var responseBody = json.decode(response.body);
     DrinksList drink = DrinksList.fromJson(responseBody);
-    print(drink.toJson());
     return drink.drinks[0];
   }
 
@@ -51,7 +50,6 @@ class DrinkDetailView extends StatelessWidget {
           return Center(
             child: CircularProgressIndicator(),
           );
-        print(snapshot.data.toJson());
         return _getTextFromInstuctions(snapshot.data.strInstructions);
       },
     ));

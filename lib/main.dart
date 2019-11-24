@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData.dark(),
       routes: {
-        DrinksView.routeName: (context) => DrinksView(
+        '/': (context) => DrinksView(
               category: new Category(strCategory: 'Ordinary Drink'),
             ),
       },

@@ -54,7 +54,11 @@ class AppDrawerState extends State<AppDrawer> {
           children: snapshot.data
               .map((category) => Container(
                       child: ListTile(
-                    title: Text(category.strCategory),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                    title: Text(category.strCategory,
+                        style: TextStyle(
+                            fontFamily: "Calibre-Semibold", fontSize: 27.0)),
                     onTap: () {
                       Navigator.push(context, _getPageBuilder(category));
                     },
